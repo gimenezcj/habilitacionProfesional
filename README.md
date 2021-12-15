@@ -13,3 +13,18 @@ Nota: el script dev realiza el arranque simultaneo del servidor de datos, en el 
 
 npm run server    -> Arranca solo el servicio de API
 npm run client    -> Arranca solo el front
+
+
+Configuracion del acceso a la base de datos:
+
+El archivo que tiene los datos de configuracion es: model/database.js
+
+const database=new Sequelize (
+  'habilitacion',                 //Base de datos
+  'javier',                       //Usuario
+  'j',                            //Contraseña
+  {
+    host: 'localhost',            //Host del servidor
+    dialect: 'mysql'              //Tipo de cliente
+  }
+);
