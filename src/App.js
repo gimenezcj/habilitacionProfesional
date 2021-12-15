@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Login from './pages/login';
+import QES from './pages/QES';
+import Funcionalidades from './pages/Funcionalidades';
+import Seleccion3 from './pages/Seleccion3';
+import useToken from './components/useToken';
 import './App.css';
 
 function App() {
+  const { token, setToken } = useToken();
+//  if(!token) {
+//    return <Login setToken={setToken} token={token}/>
+//  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {!token && <Route path="/" element={<Login setToken={setToken}  token={token}/>} /> }
+        {!token && <Route path="/home" element={<Login setToken={setToken}  token={token}/>} />}
+        {token && <Route path="/" element={<Seleccion3 setToken={setToken}  token={token}/>} />}
+        {token && <Route path="/home" element={<Seleccion3 setToken={setToken}  token={token}/>} />}
+        <Route path="/QES" element={<QES setToken={setToken}  token={token}/>} />
+        <Route path="/Funcionalidades" element={<Funcionalidades setToken={setToken}  token={token}/>} />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
