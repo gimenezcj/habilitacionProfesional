@@ -7,7 +7,7 @@ function Banner (props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="banner1.png"
+      src="/banner1.png"
       alt="First slide"
     />
     <Carousel.Caption>
@@ -18,7 +18,7 @@ function Banner (props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="banner2.png"
+      src="/banner2.png"
       alt="Second slide"
     />
 
@@ -30,7 +30,7 @@ function Banner (props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="banner3.png"
+      src="/banner3.png"
       alt="Third slide"
     />
 

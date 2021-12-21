@@ -3,7 +3,8 @@ import {TileLayer, MapContainer, LayersControl, Marker,Popup} from "react-leafle
 import {Container,Row,Col} from 'react-bootstrap';
 import Encabezado1 from '../components/Encabezado1';
 import IconsMap from '../components/IconsMap';
-import IconosDetalle from '../components/IconosDetalle';
+import IconosDetalle from '../components/IconosDetalle2';
+
 import {Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -22,11 +23,25 @@ const Icono=({pos,estado,nombre,ubicacion,id})=>{
       <Popup>
         <h2>{nombre}</h2>
         <p>{ubicacion}</p>
-        <Link  to={{pathname: "/estacion",search: id}}><Button >Acceder</Button></Link>
+        <Link  to={ "/estacion/"+id}>
+          <Button >Ver datos de la estacion</Button>
+        </Link>
       </Popup>
     </Marker>)}
 
+const ultimoEstado=(e)=>{
+    if (e.length===0)
+      return 5;
+    return e[0].estadoNivelCaudal;
+}
+
 const Seleccion3 = ({setToken,token}) => {
+
+  const [estaciones, setEstaciones] = useState([]);
+
+  useEffect(() => {
+   IconosDetalle().then(x=>setEstaciones(x.data));
+  }, []);
 
   return (
     <>
@@ -48,14 +63,14 @@ const Seleccion3 = ({setToken,token}) => {
       </Row>
       <Row>
         <Col>
-          <MapContainer  style={{width:"100%",position:"relative"}} center={[-34.905,-57.925]} zoom={14} zoomControl={true}>
+          <MapContainer  style={{width:"100%",position:"relative"}} center={[-34.905,-57.925]} zoom={12} zoomControl={true}>
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url={maps.base}
             />
-            {IconosDetalle.iconos.map(park => (
-              <Icono pos={park.geometry.coordinates} estado={park.estado} nombre={park.properties.NAME} ubicacion={park.properties.UBICACION} id={park.properties.ID} />
-            ))}
+               {estaciones.map(e =>
+                 <Icono pos={[e.lat,e.lng]} estado={ultimoEstado(e.estados)} nombre={e.name} ubicacion={e.description} id={e.id} />
+               )}
           </MapContainer>
         </Col>
       </Row>
