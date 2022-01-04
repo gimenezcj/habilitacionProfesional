@@ -35,7 +35,9 @@ controller.nuevoEstado=async(req,res)=>{
   try {
     const nuevoEstado=await EstacionesEstado.create(req.body);
     if (nuevoEstado) {
+      //console.log(nuevoEstado);
       res.json({ nuevoEstado });
+  //    console.log(res);
     } else {
       res.status(500);
     }
@@ -135,6 +137,33 @@ controller.logout=async(req,res)=>{
   }
 }
 
-
+controller.getUltimos5=async(req,res)=>{
+  try {
+    const {id}=req.params;
+      const response= await Estaciones.findAll( {
+        where: {id:id},
+        include: [{
+          model: EstacionesEstado,
+          as:'estados',
+          attributes:['estadoLLuvia','estadoNivelCaudal','estadoBateria','mmLluvia','mmNivel','trBateria','fechaDatos'],limit: 5,order:[['fechaDatos','DESC']]
+        }],
+        attributes:['name','description','lat','lng'],
+      })
+      .then(data=>{
+        const res={success:true,message: 'carga exitosa', data:data}
+        return res;
+      })
+      .catch(error=>{
+        const res={success:false,error:error}
+        return res;});
+      return res.json(response);
+  } catch (e) {
+    console.log('Error controller listAll');
+    console.log(e);
+  }
+}
 
 module.exports=controller;
+
+
+//        attributes: {  exclude:['createdAt','updatedAt','estados.createdAt']  }})

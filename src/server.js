@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
   console.log("New client connected");
 //  if (interval) {
 //    clearInterval(interval);
-//  }
+//  }npm install moment --save
   let idEstacion = socket.handshake.query['idEstacion'];
 
   if(sockets.has(idEstacion))
@@ -79,19 +79,17 @@ const getApiAndEmit = (socket,idEstacion) => {
 };
 
 
-const agregarEstado=(req,res)=>{
+const agregarEstado=async (req,res)=>{
   const {id}=req.params;
   req.body.idEstacion=id;
+  req.body.fechaDatos=Date.now();
   controllerEstacion.nuevoEstado(req,res)
   .then(()=>{
     let lista=sockets.get(id);
     lista.forEach(socket=>{
       socket.emit("FromAPI",req.body);
-      console.log(req.body);
+      //console.log(res);
     })
-//    for (let [key, value] of sockets) {
-//      console.log(key + ' goes ' + value.length);
-//    }
   });
 
 }

@@ -4,32 +4,36 @@ import Encabezado1 from '../components/Encabezado1';
 import {Button,Stack} from 'react-bootstrap';
 import {useParams,useNavigate } from 'react-router-dom';
 import { RiCheckboxFill, RiAlertFill } from "react-icons/ri";
-
+import Actual from '../components/Actual';
+import Estadistica from '../components/Estadistica';
+import SolicitarDatos from '../components/SolicitarDatos';
+import SocketClient from "../components/SocketClient";
 
 
 // Import the JS and CSS:
-
-const DatosEstacion= async(id) => {
-return await fetch('http://localhost:3800/estacion/id/'+id, {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-})
-  .then(data => data.json())
-}
 
 const NivelAguaDetalle = ({setToken,token}) => {
 
   const { id } = useParams();
 
   const [estacion, setEstacion] = useState([]);
+  const [estados,setEstados]=useState([]);
+  const [unEstado, setUnEstado] =useState(undefined);
+  const [estadoActual, setEstadoActual] =useState(undefined);
+  useEffect(()=>{
+    if(unEstado) {
+      let es=estados;
+      es.unshift(unEstado);
+      es.slice(0, 10);
+      setEstados(es);
+      setEstadoActual(unEstado);
+    }
+  },[unEstado])
 
   let navigate = useNavigate();
 
-
   useEffect(() => {
-   DatosEstacion(id).then(x=>setEstacion(x.data));
+   SolicitarDatos('estacion/ultimos5/id/'+id).then(x=>{setEstacion(x.data[0]);setEstados(x.data[0].estados);setEstadoActual(x.data[0].estados[0]);});
   }, []);
 
   return (
@@ -40,22 +44,23 @@ const NivelAguaDetalle = ({setToken,token}) => {
           <Encabezado1 setToken={setToken}  token={token}/>
         </Col>
       </Row>
-      <Row>
-        <Col>
-        <Stack gap={0} className="col-md-12 mx-auto">
-          <h1>DETALLE NIVEL DE AGUA</h1><Button onClick={()=>navigate(-1)}>Panel General</Button>
-          <h3>Estacion numero: {estacion.id} </h3>
-          <h3>Estacion numero: {estacion.name} </h3>
-          <h3>Ubicacion: {estacion.description}</h3>
-        </Stack>
-        </Col>
+      <Row >
+        <Col  sm={8}><h1>DETALLE NIVEL DE AGUA</h1></Col><Col sm={4}><Button onClick={()=>navigate(-1)}>Volver al Panel General</Button></Col>
       </Row>
+      <Row>
+        <Col sm={3}><h3>Estacion n°: {id} </h3></Col>
+        <Col sm={9}><h3>Denominacion: {estacion.name} </h3></Col>
+      </Row>
+      <Row><Col><h3>Ubicacion: {estacion.description}</h3></Col></Row>
       <Row className="justify-content-md-center">
         <Col >
+        {estadoActual && <Actual estado={estadoActual}/> }
         </Col>
         <Col >
+        {estadoActual && <Estadistica estados={estados}/> }
         </Col>
       </Row>
+      <SocketClient cambioEstado={setUnEstado} idEstacion={id} />
     </Container>
     </>
   );
