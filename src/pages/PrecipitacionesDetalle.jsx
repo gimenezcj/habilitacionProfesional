@@ -3,8 +3,7 @@ import {Container,Row,Col} from 'react-bootstrap';
 import Encabezado1 from '../components/Encabezado1';
 import {Button,Stack} from 'react-bootstrap';
 import {useParams,useNavigate } from 'react-router-dom';
-import { RiCheckboxFill, RiAlertFill } from "react-icons/ri";
-import { BsWater } from "react-icons/bs";
+import { RiCheckboxFill, RiAlertFill,RiShowersFill } from "react-icons/ri";
 import Actual from '../components/Actual';
 import Estadistica from '../components/Estadistica';
 import SolicitarDatos from '../components/SolicitarDatos';
@@ -13,7 +12,7 @@ import SocketClient from "../components/SocketClient";
 
 // Import the JS and CSS:
 
-const NivelAguaDetalle = ({setToken,token}) => {
+const PrecipitacionesDetalle = ({setToken,token}) => {
 
   const { id } = useParams();
 
@@ -46,7 +45,7 @@ const NivelAguaDetalle = ({setToken,token}) => {
         </Col>
       </Row>
       <Row >
-        <Col  sm={8}><h1>DETALLE NIVEL DE AGUA <BsWater/></h1></Col><Col sm={4}><Button onClick={()=>navigate(-1)}>Volver al Panel General</Button></Col>
+        <Col  sm={8}><h1>PRECIPITACIONES <RiShowersFill/></h1></Col><Col sm={4}><Button onClick={()=>navigate(-1)}>Volver al Panel General</Button></Col>
       </Row>
       <Row>
         <Col sm={3}><h3>Estacion n°: {id} </h3></Col>
@@ -55,10 +54,10 @@ const NivelAguaDetalle = ({setToken,token}) => {
       <Row><Col><h3>Ubicacion: {estacion.description}</h3></Col></Row>
       <Row className="justify-content-md-center">
         <Col >
-        {estadoActual && <Actual estado={estadoActual} seleccionNivel='estadoNivelCaudal' seleccionValor='mmNivel'/> }
+        {estadoActual && <Actual estado={estadoActual} seleccionNivel='estadoLLuvia' seleccionValor='mmLluvia'/> }
         </Col>
         <Col >
-        {estadoActual && <Estadistica estados={estados} seleccionNivel='estadoNivelCaudal' seleccionValor='mmNivel'/> }
+        {estadoActual && <Estadistica estados={estados} seleccionNivel='estadoLLuvia' seleccionValor='mmLluvia'/> }
         </Col>
       </Row>
       <SocketClient cambioEstado={setUnEstado} idEstacion={id} />
@@ -67,4 +66,4 @@ const NivelAguaDetalle = ({setToken,token}) => {
   );
 };
 
-export default NivelAguaDetalle;
+export default PrecipitacionesDetalle;

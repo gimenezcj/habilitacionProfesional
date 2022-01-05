@@ -9,7 +9,6 @@ const iconUrt=(i)=>{return "/images/iconos/marcador-"+i+".png"}
 const IconsMap = lista.map((i)=>new Icon({
 iconRetinaUrl,
   shadowUrl,
-  iconSize: [25, 41],
   iconUrl: iconUrt(i),
   iconSize: [25, 50],
   iconAnchor: [12, 41],

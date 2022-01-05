@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {Container,Row,Col} from 'react-bootstrap';
 import Encabezado1 from '../components/Encabezado1';
 import {Button,Stack} from 'react-bootstrap';
@@ -27,7 +27,7 @@ const FrontColor=['white','black','black','white','white','white']
 const NivelAgua=({estado})=>{
   if(estado===undefined || estado.estadoNivelCaudal===undefined )
     return (<Button variant="success" style={{background:'gray'}}  className="col-md-12 mx-auto" disabled>NIVEL DE AGUA  <h1><RiAlertFill /></h1></Button>)
-  if(estado!=undefined)
+  if(estado!==undefined)
     return (<Link  to={ "/estacion/agua/"+estado.idEstacion} ><Button variant={TypeButton[estado.estadoNivelCaudal]} className="col-md-12 mx-auto">NIVEL DE AGUA  <h1>{ImageButton[estado.estadoNivelCaudal]}</h1></Button></Link>);
   return (<></>)
 }
@@ -36,7 +36,7 @@ const NivelLluvia=({estado})=>{
 
   if(estado===undefined || estado.estadoLLuvia===undefined )
     return (<Button variant="success" style={{background:'gray'}}  className="col-md-12 mx-auto" disabled>PRECIPITACIONES <h1><RiAlertFill /></h1></Button>)
-  if(estado!=undefined)
+  if(estado!==undefined)
     return (<Link  to={ "/estacion/lluvia/"+estado.idEstacion} ><Button variant={TypeButton[estado.estadoLLuvia]} className="col-md-12 mx-auto">PRECIPITACIONES <h1>{ImageButton[estado.estadoLLuvia]}</h1></Button></Link>);
   return (<></>)
 }
@@ -44,7 +44,7 @@ const NivelLluvia=({estado})=>{
 const NivelBateria=({estado})=>{
   if(estado===undefined || estado.estadoBateria===undefined )
     return (<Button variant="success" style={{background:'gray'}}  className="col-md-12 mx-auto" disabled>ESTADO DE BATERIA <h1><RiAlertFill /></h1></Button>)
-  if(estado!=undefined)
+  if(estado!==undefined)
     return (<div style={{"background-color" : BackgroundColor[estado.estadoBateria], "color": FrontColor[estado.estadoBateria], "text-align":"center"}}>ESTADO DE BATERIA <h1>{ImageButton[4-estado.estadoBateria]}</h1></div>);
   return (<></>)
 }
