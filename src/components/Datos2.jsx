@@ -13,7 +13,7 @@ function Datos2 (props) {
 	const generar=()=>{
 		let d=[];
 		if(estados){
-	 	 estados.forEach(x=>d.push({y:x[seleccionValor],color:color[x[seleccionNivel]],label:Moment(x.fechaDatos).format('hh.mm:ss')}))
+	 	 estados.forEach(x=>d.push({y:parseFloat(x[seleccionValor]),color:color[x[seleccionNivel]],label:Moment(x.fechaDatos).format('hh.mm:ss')}))
 	 	 datos=d;
 		 console.log(d);
 	 	}
