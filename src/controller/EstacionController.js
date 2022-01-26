@@ -96,7 +96,14 @@ controller.get=async(req,res)=>{
 
 controller.listAll=async(req,res)=>{
   try {
-    const response=await Estaciones.findAll({ include: ["estados"] })
+    const response=await Estaciones.findAll({
+      include: [{
+        model: EstacionesEstado,
+        as:'estados',
+        attributes:['estadoLLuvia','estadoNivelCaudal','estadoBateria','fechaDatos'],limit: 2,order:[['fechaDatos','DESC']]
+      }],
+      attributes: {  exclude:['createdAt','updatedAt']  },
+    })
     .then((data)=>{
       const res={success:true,message: 'carga exitosa', data:data}
       return res;})

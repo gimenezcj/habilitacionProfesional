@@ -5,13 +5,41 @@ var Usuarios=database.define('usuarios',{
   id:{
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoincrement: true
+    autoIncrement: true
   },
-  name: Sequelize.STRING,
-  email:Sequelize.STRING,
-  password: Sequelize.STRING,
-  image: Sequelize.STRING,
-  token: Sequelize.STRING
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  email:{
+    type:Sequelize.STRING,
+    unique: true,
+    validate: {
+      isEmail: true,
+    },
+    allowNull: false,
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  image: {
+    type:Sequelize.STRING,
+    defaultValue: "default.png"},
+  token: {
+    type:Sequelize.STRING,
+    allowNull: true,
+  },
+  createdAt: {
+    allowNull: false,
+    defaultValue: Sequelize.fn('now'),
+    type: Sequelize.DATE
+  },
+updatedAt: {
+    allowNull: false,
+    defaultValue: Sequelize.fn('now'),
+    type: Sequelize.DATE
+  }
 });
 
 module.exports=Usuarios;

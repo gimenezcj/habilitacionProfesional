@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Form,Button,Nav} from 'react-bootstrap';
 
 async function loginUser(credentials) {
-  console.log('login');
+
  return fetch('http://localhost:3800/usuario/login', {
    method: 'POST',
    headers: {
@@ -15,25 +15,22 @@ async function loginUser(credentials) {
 }
 
 function Ingreso ({ setToken,token }) {
-  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-
 
   const handleSubmit = async e => {
    e.preventDefault();
    const token2 = await loginUser({
-     username,
+     email,
      password
    });
    setToken(token2);
-
-   console.log(token2);
   }
 
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control  placeholder="Usuario" onChange={e => setUserName(e.target.value)} />
+        <Form.Control  placeholder="email" onChange={e => setEmail(e.target.value)} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -46,10 +43,10 @@ function Ingreso ({ setToken,token }) {
 
       <Nav className="flex-column">
         <Nav.Item>
-          <Nav.Link href="/home">Olvide mi contraseña</Nav.Link>
+          <Nav.Link href="/RecuperoClave">Olvide mi contraseña</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="/home">No tenes cuenta de usuario? Solicitala</Nav.Link>
+          <Nav.Link href="/NuevaCuenta">No tenes cuenta de usuario? Solicitala</Nav.Link>
         </Nav.Item>
       </Nav>
     </Form>

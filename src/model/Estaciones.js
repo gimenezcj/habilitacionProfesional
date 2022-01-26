@@ -12,7 +12,17 @@ var Estaciones=database.define('estaciones',{
   name: Sequelize.STRING,
   description:Sequelize.STRING,
   lat: Sequelize.FLOAT,
-  lng: Sequelize.FLOAT, 
+  lng: Sequelize.FLOAT,
+  createdAt: {
+    allowNull: false,
+    defaultValue: Sequelize.fn('now'),
+    type: Sequelize.DATE
+  },
+  updatedAt: {
+    allowNull: false,
+    defaultValue: Sequelize.fn('now'),
+    type: Sequelize.DATE
+  }
 });
 
 Estaciones.hasMany(EstacionesEstado, {

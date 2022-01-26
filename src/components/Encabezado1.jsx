@@ -25,21 +25,25 @@ function Encabezado1 ({setToken,token}) {
   const handleMap = async e => {
    navigate("/", { replace: true });
   }
+
   return (
     <Nav className="flex-row justify-content-end" activeKey="/home" onSelect={(selectedKey) =>{
       if(selectedKey==="1") handleSubmit();
       if(selectedKey==="2") handleMap();
     }}>
-      {token && <Image src="/images/avatar/javier.jpg" width="50px" roundedCircle thumbnail />}
-      {token && <Nav.Link eventKey="3" disabled> Javier Gimenez </Nav.Link>}
+
+      {token && <Image src={"/images/avatar/"+token.image } width="50px" roundedCircle thumbnail />}
+      {token && <Nav.Link eventKey="3" disabled> {token.name}</Nav.Link>}
       {!token &&
         <>
+        <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/QES">Que es SAMCA</Nav.Link>
           <Nav.Link href="/Funcionalidades">Funcionalidades</Nav.Link>
           <Nav.Link eventKey="link-2">Contacto</Nav.Link>
         </>
       }
       {token && <>
+
         <Nav.Link eventKey="2">Mapa</Nav.Link>
         <Nav.Link eventKey="link-2">Ayuda</Nav.Link>
         <Nav.Link eventKey="1">Cerar Sesion</Nav.Link>
