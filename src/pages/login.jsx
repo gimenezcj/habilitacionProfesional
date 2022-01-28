@@ -7,8 +7,8 @@ import Banner from './../components/Banner';
 function Login({ setToken,token }) {
   return (
     <Container style={{background: "#8dadc8",color:"#073763"}}>
-      <Row>
-        <Col md={{ span: 6, offset: 6 }}>
+      <Row style={{"margin-bottom":"3vh"}}>
+        <Col >
           <Encabezado1 setToken={setToken}  token={token}/>
         </Col>
       </Row>
@@ -21,7 +21,7 @@ function Login({ setToken,token }) {
           <Ingreso setToken={setToken}  token={token}/>
         </Col>
       </Row>
-      <Row>
+      <Row style={{"margin-top":"5vh"}}>
         <Banner />
       </Row>
     </Container>

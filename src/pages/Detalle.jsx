@@ -4,6 +4,7 @@ import Encabezado1 from '../components/Encabezado1';
 import {Button,Stack} from 'react-bootstrap';
 import {useParams,useNavigate } from 'react-router-dom';
 import { RiCheckboxFill, RiAlertFill,RiShowersFill } from "react-icons/ri";
+import { BsWater } from "react-icons/bs";
 import Actual from '../components/Actual';
 import Estadistica from '../components/Estadistica';
 import SolicitarDatos from '../components/SolicitarDatos';
@@ -21,8 +22,10 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 
 // Import the JS and CSS:
+const TituloLluvia=()=>{return (<h1>PRECIPITACIONES <RiShowersFill/></h1>)};
+const TituloNivel=()=>{return (<h1>DETALLE NIVEL DE AGUA <BsWater/></h1>)};
 
-const PrecipitacionesDetalle = ({setToken,token}) => {
+const Detalle = ({setToken,token,por}) => {
 
   const { id } = useParams();
 
@@ -57,8 +60,8 @@ const PrecipitacionesDetalle = ({setToken,token}) => {
   const [endDate, setEndDate] = useState(new Date());
 
   const [datosHistoricos,setDatosHistoricos]=useState([]);
-  const contenido=datosHistoricos.map((d,i)=><tr><td>{i+1}</td><td>{Moment(d.fechaDatos).format('D-MM-YYYY')}</td><td>{Moment(d.fechaDatos).format('hh:mm:s')}</td><td>{d.mmLluvia}</td></tr>);
-  const contenido2 = datosHistoricos.map(elt=> [Moment(elt.fechaDatos).format('D-MM-YYYY'),Moment(elt.fechaDatos).format('hh:mm:s'), elt.mmLluvia]);
+  const contenido=datosHistoricos.map((d,i)=><tr><td>{i+1}</td><td>{Moment(d.fechaDatos).format('D-MM-YYYY')}</td><td>{Moment(d.fechaDatos).format('hh:mm:s')}</td><td>{(por=='lluvia')?d.mmLluvia:d.mmNivel}</td></tr>);
+  const contenido2 = datosHistoricos.map(elt=> [Moment(elt.fechaDatos).format('D-MM-YYYY'),Moment(elt.fechaDatos).format('hh:mm:s'), (por=='lluvia')?elt.mmLluvia:elt.mmNivel]);
 
 
 const DatosHistoricosRango= async() => {
@@ -75,6 +78,10 @@ const ConsultarHistoricos=()=>{
     if(seleccion==1) DatosHistoricosCriterio().then(x=>setDatosHistoricos(x.data));
     if(seleccion==2) DatosHistoricosRango().then(x=>setDatosHistoricos(x.data));
 }
+
+
+
+
 
 const exportPDF = () => {
     const unit = "pt";
@@ -103,6 +110,8 @@ const exportPDF = () => {
   }
 
 
+
+
   return (
     <>
     <Container style={{background: "#8dadc8",color:"#073763",height:"100vh"}} fluid>
@@ -112,7 +121,7 @@ const exportPDF = () => {
         </Col>
       </Row>
       <Row >
-        <Col  sm={8}><h1>PRECIPITACIONES <RiShowersFill/></h1></Col><Col sm={4}><Button onClick={()=>navigate(-1)}>Volver al Panel General</Button></Col>
+        <Col  sm={8}>{por=='lluvia'?<TituloLluvia/>:<TituloNivel/>}</Col><Col sm={4}><Button onClick={()=>navigate(-1)}>Volver al Panel General</Button></Col>
       </Row>
       <Row>
         <Col sm={3}><h3>Estacion n°: {id} </h3></Col>
@@ -122,10 +131,12 @@ const exportPDF = () => {
       {!verHistorico &&
       <Row className="justify-content-md-center">
         <Col >
-        {estadoActual && <Actual estado={estadoActual} seleccionNivel='estadoLLuvia' seleccionValor='mmLluvia'/> }
+        {estadoActual &&
+          <Actual estado={estadoActual} seleccionNivel={por=='lluvia'?'estadoLLuvia':'estadoNivelCaudal'} seleccionValor={por=='lluvia'?'mmLluvia':'mmNivel'}/> }
         </Col>
         <Col >
-        {estadoActual && <Estadistica estados={estados} seleccionNivel='estadoLLuvia' seleccionValor='mmLluvia'/> }
+        {estadoActual &&
+          <Estadistica estados={estados} seleccionNivel={por=='lluvia'?'estadoLLuvia':'estadoNivelCaudal'} seleccionValor={por=='lluvia'?'mmLluvia':'mmNivel'}/> }
         <br/>
         <Button onClick={()=>setVerHistorico(true)}>Ver HISTORICO</Button>
         </Col>
@@ -192,9 +203,8 @@ const exportPDF = () => {
         <Col  className="mx-auto" style={{"display": "flex","justify-content":"center","margin":"10px","padding":"10px"}}>
           <Button onClick={()=>ConsultarHistoricos()}
             disabled={(
-              seleccion==0)&&
-              (seleccion==1&&cantidad!='Seleccion'&&criterio!='Seleccion')&&
-              (seleccion==2&&startDate!=''&&endDate!='')} >
+              seleccion==0)||
+              (seleccion==1&&(cantidad=='Seleccionar'||criterio=='Seleccionar'))} >
           Consultar</Button></Col>
       </Row>
       <Row>
@@ -233,4 +243,4 @@ const exportPDF = () => {
   );
 };
 
-export default PrecipitacionesDetalle;
+export default Detalle;

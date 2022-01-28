@@ -45,9 +45,9 @@ const Seleccion3 = ({setToken,token}) => {
 
   return (
     <>
-    <Container style={{background: "#8dadc8",color:"#073763",height:"90vh"}} fluid>
-      <Row>
-        <Col md={{ span: 6, offset: 6 }}>
+    <Container style={{background: "#8dadc8",color:"#073763",height:"100vh"}} fluid>
+      <Row style={{"margin-bottom":"3vh"}}>
+        <Col>
           <Encabezado1 setToken={setToken}  token={token}/>
         </Col>
       </Row>

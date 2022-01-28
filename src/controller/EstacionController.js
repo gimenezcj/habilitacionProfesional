@@ -1,5 +1,5 @@
 
-
+const { Op } = require("sequelize");
 const controller={}
 
 var Estaciones=require('./../model/Estaciones');
@@ -169,6 +169,61 @@ controller.getUltimos5=async(req,res)=>{
     console.log(e);
   }
 }
+
+controller.getByRango=async(req,res)=>{
+  const {id,desde,hasta}=req.params;
+  try {
+    console.log(id,desde,hasta);
+    const response= await EstacionesEstado.findAll({
+      where: {idEstacion:id,fechaDatos: {[Op.between]: [desde, hasta]}},
+      order: [['fechaDatos', 'DESC'],],
+      attributes: {  exclude:['id','idEstacion','createdAt','updatedAt']  }
+    })
+    .then(data=>{
+      const res={success:true,message: 'carga exitosa', data:data}
+      return res;
+    })
+    .catch(error=>{
+      const res={success:false,error:error}
+      return res;});
+    return res.json(response);
+  } catch (e) {
+    console.log('Error controller UltimoEstado');
+    console.log(e);
+  }
+}
+
+controller.getByCriterio=async(req,res)=>{
+  const {id,cant,criterio}=req.params;
+  try {
+    console.log(id,cant,criterio);
+    if(criterio.substring(0, 7)=='Ultimos') order=[['fechaDatos', 'DESC'],];
+    if(criterio.substring(0, 8)=='Primeros') order=[['fechaDatos', 'ASC'],];
+    if(criterio=='Minimoslluvia') order=[['mmLluvia', 'ASC'],];
+    if(criterio=='Maximoslluvia') order=[['mmLluvia', 'DESC'],];
+    if(criterio=='Minimosnivel') order=[['mmNivel', 'ASC'],];
+    if(criterio=='Maximosnivel') order=[['mmNivel', 'DESC'],];
+    const response= await EstacionesEstado.findAll({
+      where: {idEstacion:id},
+      order: order,
+      limit: cant*1,
+      attributes: {  exclude:['id','idEstacion','createdAt','updatedAt']  }
+    })
+    .then(data=>{
+      const res={success:true,message: 'carga exitosa', data:data}
+      return res;
+    })
+    .catch(error=>{
+      const res={success:false,error:error}
+      return res;});
+    return res.json(response);
+  } catch (e) {
+    console.log('Error controller UltimoEstado');
+    console.log(e);
+  }
+}
+
+
 
 module.exports=controller;
 

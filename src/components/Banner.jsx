@@ -7,8 +7,8 @@ function Banner (props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://pbs.twimg.com/profile_banners/829714913413185536/1487674999/1500x500"
-      alt="First slide"
+      src="/banner/fotoUtn.jpeg"
+      alt="UTN La Plata"
     />
     <Carousel.Caption className="carruselshadow">
       <h3 style={{color:'white'}}>Estación principal</h3>
@@ -18,10 +18,8 @@ function Banner (props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="/imagen-zoocrop.jpg"
-      alt="Second slide"
-      width="1500px"
-      height="500px"
+      src="/banner/fotoZoo.jpg"
+      alt="Zoologico de La Plata"
     />
 
     <Carousel.Caption className="carruselshadow">
@@ -32,12 +30,12 @@ function Banner (props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="/bannerr.png"
-      alt="Third slide"
+      src="/banner/inicial.jpg"
+      alt="Proximamente"
     />
 
     <Carousel.Caption className="carruselshadow">
-      <h3 style={{color:'white'}}> ...</h3>
+      <h3 style={{color:'white'}}> </h3>
       <p style={{color:'white'}}>Próximamente nuevas estaciones</p>
     </Carousel.Caption>
   </Carousel.Item>

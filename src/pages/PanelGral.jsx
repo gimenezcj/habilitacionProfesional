@@ -84,7 +84,7 @@ const PanelGral = ({setToken,token}) => {
 
   return (
     <>
-    <Container style={{background: "#8dadc8",color:"#073763",height:"90vh"}} fluid>
+    <Container style={{background: "#8dadc8",color:"#073763",height:"100vh"}} fluid>
       <div style={{"text-align":"right"}}>
         <Encabezado1 setToken={setToken}  token={token}/>
       </div>
