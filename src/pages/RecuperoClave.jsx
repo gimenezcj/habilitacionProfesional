@@ -31,8 +31,8 @@ function RecuperoClave({ setToken,token }) {
 
   return (
     <Container style={{background: "#8dadc8",color:"#073763",height:"100vh"}}>
-    <Row>
-      <Col md={{ span: 6, offset: 6 }}>
+    <Row style={{"margin-bottom":"3vh"}}>
+      <Col>
         <Encabezado1 setToken={setToken}  token={token}/>
       </Col>
     </Row>
