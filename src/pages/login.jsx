@@ -14,8 +14,8 @@ function Login({ setToken,token }) {
       </Row>
       <Row>
         <Col>
-          <p>Te damos la bienvenida a SAMACA</p>
-          <h3>Sistema Autonomo para la Medicion de Cursos de Aguas</h3>
+          <p>Te damos la bienvenida a SAMCA</p>
+          <h3>Sistema Autónomo para la Medición de Cursos de Agua</h3>
         </Col>
         <Col>
           <Ingreso setToken={setToken}  token={token}/>

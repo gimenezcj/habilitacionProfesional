@@ -7,36 +7,38 @@ function Banner (props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="/banner1.png"
+      src="https://pbs.twimg.com/profile_banners/829714913413185536/1487674999/1500x500"
       alt="First slide"
     />
-    <Carousel.Caption>
-      <h3>Primera Imagen</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    <Carousel.Caption className="carruselshadow">
+      <h3 style={{color:'white'}}>Estación principal</h3>
+      <p style={{color:'white'}}>UTN La Plata</p>
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="/banner2.png"
+      src="/imagen-zoocrop.jpg"
       alt="Second slide"
+      width="1500px"
+      height="500px"
     />
 
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <Carousel.Caption className="carruselshadow">
+      <h3 style={{color:'white'}}>Estación</h3>
+      <p style={{color:'white'}}>Zoo La Plata</p>
     </Carousel.Caption>
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="/banner3.png"
+      src="/bannerr.png"
       alt="Third slide"
     />
 
-    <Carousel.Caption>
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+    <Carousel.Caption className="carruselshadow">
+      <h3 style={{color:'white'}}> ...</h3>
+      <p style={{color:'white'}}>Próximamente nuevas estaciones</p>
     </Carousel.Caption>
   </Carousel.Item>
 </Carousel>

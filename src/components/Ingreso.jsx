@@ -37,18 +37,32 @@ function Ingreso ({ setToken,token }) {
         <Form.Control type="password" placeholder="Clave" onChange={e => setPassword(e.target.value)}/>
       </Form.Group>
 
-      <Button variant="primary" type="submit" className="mb-3" >
+      <Button style={{position:'absolute'}} variant="primary" type="submit" className="mb-3" >
         Acceder
       </Button>
 
-      <Nav className="flex-column">
+      
+ 
+<div style={{textAlign:'right'}} > <li><a  href="/RecuperoClave" style={{fontSize:'14px'}}>  Olvide mi contraseña </a> </li> 
+      <li> <a  href="/NuevaCuenta" style={{fontSize:'14px'}}>   No tenes cuenta de usuario? Solicitala </a></li>
+
+</div>
+
+      
+      {/* <div style="text-align: center;">
+    <button style="position: absolute;top: 50%;">Hello</button>
+</div> */}
+
+     
+
+      {/* <Nav>
         <Nav.Item>
           <Nav.Link href="/RecuperoClave">Olvide mi contraseña</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="/NuevaCuenta">No tenes cuenta de usuario? Solicitala</Nav.Link>
+          <Nav.Link href="/NuevaCuenta">No tenes cuenta de usuario? Solicitala </Nav.Link>
         </Nav.Item>
-      </Nav>
+      </Nav> */}
     </Form>
   )
 }

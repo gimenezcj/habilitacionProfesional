@@ -26,19 +26,32 @@ function Encabezado1 ({setToken,token}) {
    navigate("/", { replace: true });
   }
 
+  const icon =
+  <span>
+    <img src="/logo-samca.jpg" width="50 px"/>
+ 
+  </span> 
+
   return (
+
+    
+
     <Nav className="flex-row justify-content-end" activeKey="/home" onSelect={(selectedKey) =>{
       if(selectedKey==="1") handleSubmit();
       if(selectedKey==="2") handleMap();
-    }}>
+    }}  >
 
       {token && <Image src={"/images/avatar/"+token.image } width="50px" roundedCircle thumbnail />}
       {token && <Nav.Link eventKey="3" disabled> {token.name}</Nav.Link>}
       {!token &&
         <>
-        <Nav.Link href="/">Home</Nav.Link>
+        
+       
+          <Nav.Link href="/" > {icon}</Nav.Link>
+          <Nav.Link href="/"> Home</Nav.Link>
           <Nav.Link href="/QES">Que es SAMCA</Nav.Link>
           <Nav.Link href="/Funcionalidades">Funcionalidades</Nav.Link>
+  
           <Nav.Link eventKey="link-2">Contacto</Nav.Link>
         </>
       }
@@ -46,7 +59,7 @@ function Encabezado1 ({setToken,token}) {
 
         <Nav.Link eventKey="2">Mapa</Nav.Link>
         <Nav.Link eventKey="link-2">Ayuda</Nav.Link>
-        <Nav.Link eventKey="1">Cerar Sesion</Nav.Link>
+        <Nav.Link eventKey="1">Cerrar Sesion</Nav.Link>
       </> }
 
     </Nav>
