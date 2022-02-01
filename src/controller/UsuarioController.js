@@ -21,7 +21,10 @@ controller.api = async(req,res)=>{
 
 controller.listAll=async(req,res)=>{
   try {
-    const response=await Usuarios.findAll()
+    const response=await Usuarios.findAll({
+      order: [['name', 'ASC'],],
+      attributes: {  exclude:['token','password','createdAt','updatedAt']  }
+    })
     .then((data)=>{
       const res={success:true,message: 'carga exitosa', data:data}
       return res;})
@@ -120,5 +123,41 @@ controller.regenPassword=async(req,res)=>{
   return res.json(response);
 }
 
+controller.delete=async(req,res)=>{
+  const {id}=req.params;
+  try {
+    const response=await Usuarios.destroy({where: {id:id}})
+    .then((n)=>{
+      if(n===1)
+        return {success:true, data:n};
+      else
+        return {success:false, data:n};
+    })
+    .catch(error=>{
+      const res={success:false,error:error}
+      return res;});
+      return res.json(response);
+  } catch (e) {
+    response={success:false,error:'Error al eliminar la estacion'}
+    return res.json(response);
+  }
+}
 
 module.exports=controller;
+
+const usuario1=Usuarios.create({
+  name: 'admin',
+  email: 'admin@admin.com',
+  password: 'admin',
+  isadmin:true,
+  isactive:true,
+}).then(d=>{}).catch(e=>{console.log('error al crear admin')});
+
+const usuario2=Usuarios.create({
+  name: 'Javier Gimenez',
+  email: 'gimenezcj@gmail.com',
+  password: '123',
+  image: 'javier.jpg',
+  isadmin:false,
+  isactive:true,
+}).then(d=>{}).catch(e=>{console.log('error al crear javier')});

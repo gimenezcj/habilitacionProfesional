@@ -223,9 +223,88 @@ controller.getByCriterio=async(req,res)=>{
   }
 }
 
+controller.create=async(req,res)=>{
+  const {nro,name,description,lat,lng}=req.body;
+  try {
+    const response=await Estaciones.create({
+      nro:nro,
+      name:name,
+      description:description,
+      lat:lat,
+      lng:lng,
+    })
+    .then((data)=>{
+      return {success:true,estacionCreada: true, data:data};
+    })
+    .catch(error=>{
+      const res={success:false,estacionCreada:false,error:error}
+      return res;});
+      return res.json(response);
+  } catch (e) {
+    response={success:false,estacionCreada:false,error:'Error al crear la estacion'}
+//    console.log('Error al crear al usuario');
+//    console.log(e);
+    return res.json(response);
+  }
 
+}
+
+controller.delete=async(req,res)=>{
+  const {id}=req.params;
+  try {
+    const response=await Estaciones.destroy({where: {id:id}})
+    .then((n)=>{
+      if(n===1)
+        return {success:true,estacionEliminada: true, data:n};
+      else
+        return {success:false,estacionEliminada: false, data:n};
+    })
+    .catch(error=>{
+      const res={success:false,estacionEliminada:false,error:error}
+      return res;});
+      return res.json(response);
+  } catch (e) {
+    response={success:false,estacionEliminada:false,error:'Error al eliminar la estacion'}
+    return res.json(response);
+  }
+}
+
+controller.update=async(req,res)=>{
+  const {id}=req.params;
+  const {nro,name,description,lat,lng}=req.body;
+  try {
+    const response=await Estaciones.update(
+      {name:name,nro:nro,description:description,lat:lat,lng:lng},
+      {where: {id:id}})
+    .then((d)=>{
+      return {success:true,estacionModificada: true, data:d};
+    })
+    .catch(error=>{
+      const res={success:false,estacionModificada:false,error1:error}
+      return res;});
+      return res.json(response);
+  } catch (e) {
+    response={success:false,estacionModificada:false,error2:e}
+    return res.json(response);
+  }
+}
 
 module.exports=controller;
 
+const estacion1=Estaciones.create({
+  nro: 1,
+  name: 'UTN',
+  description: 'UTN FRLP',
+  lat:-34.904,
+  lng:-57.9253,
+}).then(d=>{}).catch(d=>{console.log('Exisite estacion UTN')});
+
+const estacion2= Estaciones.create({
+  nro: 2,
+  name: 'ZOO',
+  description: 'Estacion del Zoo',
+  lat:-34.91,
+  lng:-57.937,
+}).then(d=>{}).catch(d=>{console.log('Existe estacion Zoo')});
 
 //        attributes: {  exclude:['createdAt','updatedAt','estados.createdAt']  }})

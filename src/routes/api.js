@@ -9,5 +9,6 @@ route.post('/login',controller.login);
 route.get('/logout',controller.logout);
 route.post('/create',controller.create);
 route.post('/regenPassword',controller.regenPassword);
+route.delete('/:id',controller.delete);
 
 module.exports=route;

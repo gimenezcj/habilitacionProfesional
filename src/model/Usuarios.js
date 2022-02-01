@@ -30,6 +30,16 @@ var Usuarios=database.define('usuarios',{
     type:Sequelize.STRING,
     allowNull: true,
   },
+  isadmin: {
+    type:Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false,
+  },
+  isactive: {
+    type:Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false,
+  },
   createdAt: {
     allowNull: false,
     defaultValue: Sequelize.fn('now'),

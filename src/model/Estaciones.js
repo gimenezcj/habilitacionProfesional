@@ -9,6 +9,11 @@ var Estaciones=database.define('estaciones',{
     primaryKey: true,
     autoIncrement: true,
   },
+  nro: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    unique: true
+  },
   name: Sequelize.STRING,
   description:Sequelize.STRING,
   lat: Sequelize.FLOAT,
