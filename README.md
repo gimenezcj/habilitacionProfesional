@@ -55,3 +55,6 @@ BODY: {
 
 dicha API se encargara de colocar un nuevo estado en la estacion correspondiente. Para las pruebas se utilizo RESTer (complemento del firefox)
 
+### El sistema tiene dos modos de acceso:
+- Visualizacion de los datos generados por las estaciones: se accede con una cuenta de usuario activa
+- Administracion de las estaciones y los usuarios: se accede con el usuario **admin@admin.com** y clave **admin**
