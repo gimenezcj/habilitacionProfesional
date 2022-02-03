@@ -28,7 +28,7 @@ function Encabezado1 ({setToken,token}) {
 
   const icon =
     <span>
-      <img src="/samca.png" width="80 px"/>
+      <img src="/samca.png" alt="logo SAMCA" width="80 px"/>
     </span>
 
   return (

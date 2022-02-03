@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import {Container,Row,Col,Form,Modal,Table,Image} from 'react-bootstrap';
+import React, { useEffect, useState} from "react";
+import {Container,Row,Col,Modal,Table,Image} from 'react-bootstrap';
 import Encabezado1 from '../components/Encabezado1';
 
 import {Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { FaUserFriends,FaRegThumbsDown,FaRegThumbsUp,FaPlusSquare } from "react-icons/fa";
+import { FaUserFriends } from "react-icons/fa";
 import {GoAlert} from "react-icons/go";
 
 
@@ -16,7 +16,7 @@ const AdmUsuarios = ({setToken,token}) => {
 const listado= async()=>{
   async function listarUsuarios() {
    return await fetch('http://localhost:3800/usuario/list', {method: 'GET',}).then(data => data.json())}
-  const lista= listarUsuarios()
+  listarUsuarios()
     .then((d)=>{if(d.success){setLista(d.data)}})
 }
 
@@ -44,7 +44,7 @@ useEffect(() => {listado()}, []);
   const eliminar=(id)=>{
     async function eliminarUsuario(id) {
      return await fetch('http://localhost:3800/usuario/'+id, {method: 'DELETE',}).then(data => data.json())}
-     eliminarUsuario(id).then((d)=>{if(d.success)setLista(lista.filter(d=>d.id!=id));});
+     eliminarUsuario(id).then((d)=>{if(d.success)setLista(lista.filter(d=>d.id!==id));});
   }
 
   return (

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import {TileLayer, MapContainer, LayersControl, Marker,Popup,useMapEvents,useMap,MapConsumer} from "react-leaflet";
+import React, { useEffect, useState } from "react";
+import {TileLayer, MapContainer,  Marker,useMapEvents,MapConsumer} from "react-leaflet";
 import {Container,Row,Col,Form,Modal} from 'react-bootstrap';
 import Encabezado1 from '../components/Encabezado1';
 import IconsMap from '../components/IconsMap';
@@ -9,7 +9,7 @@ import {Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { FaUserFriends,FaRegThumbsDown,FaRegThumbsUp,FaPlusSquare } from "react-icons/fa";
-import {AiOutlineDelete} from "react-icons/ai";
+
 import {GoAlert} from "react-icons/go";
 
 
