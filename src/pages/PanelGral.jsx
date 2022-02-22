@@ -45,7 +45,10 @@ const NivelBateria=({estado})=>{
   if(estado===undefined || estado.estadoBateria===undefined )
     return (<Button variant="success" style={{background:'gray'}}  className="col-md-12 mx-auto" disabled>ESTADO DE BATERIA <h1><RiAlertFill /></h1></Button>)
   if(estado!==undefined)
-    return (<div style={{"background-color" : BackgroundColor[estado.estadoBateria], "color": FrontColor[estado.estadoBateria], "text-align":"center"}}>ESTADO DE BATERIA <h1>{ImageButton[4-estado.estadoBateria]}</h1></div>);
+    return (
+      <div style={{"background-color" : BackgroundColor[estado.estadoBateria], "color": FrontColor[estado.estadoBateria], "text-align":"center"}}>
+        ESTADO DE BATERIA: {estado.trBateria} volts<h1>{ImageButton[4-estado.estadoBateria]}</h1>
+      </div>);
   return (<></>)
 }
 

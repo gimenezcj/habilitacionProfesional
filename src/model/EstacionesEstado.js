@@ -12,6 +12,7 @@ var EstacionesEstado=database.define('estacionesestado',{
   estadoNivelCaudal: Sequelize.INTEGER.UNSIGNED,
   estadoBateria: Sequelize.INTEGER.UNSIGNED,
   mmLluvia: Sequelize.FLOAT,
+  mmLluviaAcum: Sequelize.FLOAT,
   mmNivel: Sequelize.FLOAT,
   trBateria: Sequelize.FLOAT,
   fechaDatos: { type: Sequelize.DATE, defaultValue: Sequelize.fn('now'), allowNull: false },
