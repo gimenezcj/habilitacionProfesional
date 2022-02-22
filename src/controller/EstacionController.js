@@ -152,7 +152,7 @@ controller.getUltimos5=async(req,res)=>{
         include: [{
           model: EstacionesEstado,
           as:'estados',
-          attributes:['estadoLLuvia','estadoNivelCaudal','estadoBateria','mmLluvia','mmNivel','trBateria','fechaDatos'],limit: 5,order:[['fechaDatos','DESC']]
+          attributes:['estadoLLuvia','estadoNivelCaudal','estadoBateria','mmLluvia','mmLluviaAcum','mmNivel','trBateria','fechaDatos'],limit: 5,order:[['fechaDatos','DESC']]
         }],
         attributes:['name','description','lat','lng'],
       })

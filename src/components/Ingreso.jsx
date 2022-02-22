@@ -1,6 +1,6 @@
 import React,{ useState } from "react";
 import PropTypes from 'prop-types';
-import {Form,Button,Nav} from 'react-bootstrap';
+import {Form,Button} from 'react-bootstrap';
 
 async function loginUser(credentials) {
 
@@ -41,19 +41,19 @@ function Ingreso ({ setToken,token }) {
         Acceder
       </Button>
 
-      
- 
-<div style={{textAlign:'right'}} > <li><a  href="/RecuperoClave" style={{fontSize:'14px'}}>  Olvide mi contraseña </a> </li> 
+
+
+<div style={{textAlign:'right'}} > <li><a  href="/RecuperoClave" style={{fontSize:'14px'}}>  Olvide mi contraseña </a> </li>
       <li> <a  href="/NuevaCuenta" style={{fontSize:'14px'}}>   No tenes cuenta de usuario? Solicitala </a></li>
 
 </div>
 
-      
+
       {/* <div style="text-align: center;">
     <button style="position: absolute;top: 50%;">Hello</button>
 </div> */}
 
-     
+
 
       {/* <Nav>
         <Nav.Item>

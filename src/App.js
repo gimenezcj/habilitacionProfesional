@@ -5,8 +5,6 @@ import QES from './pages/QES';
 import Funcionalidades from './pages/Funcionalidades';
 import Seleccion3 from './pages/Seleccion3';
 import PanelGral from './pages/PanelGral';
-import NivelAguaDetalle from './pages/NivelAguaDetalle';
-import PrecipitacionesDetalle from './pages/PrecipitacionesDetalle';
 import SolicitarCuenta from './pages/SolicitarCuenta';
 import RecuperoClave from './pages/RecuperoClave';
 import Detalle from './pages/Detalle';

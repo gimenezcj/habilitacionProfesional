@@ -60,8 +60,8 @@ const Detalle = ({setToken,token,por}) => {
   const [endDate, setEndDate] = useState(new Date());
 
   const [datosHistoricos,setDatosHistoricos]=useState([]);
-  const contenido=datosHistoricos.map((d,i)=><tr><td>{i+1}</td><td>{Moment(d.fechaDatos).format('D-MM-YYYY')}</td><td>{Moment(d.fechaDatos).format('hh:mm:s')}</td><td>{(por=='lluvia')?d.mmLluvia:d.mmNivel}</td></tr>);
-  const contenido2 = datosHistoricos.map(elt=> [Moment(elt.fechaDatos).format('D-MM-YYYY'),Moment(elt.fechaDatos).format('hh:mm:s'), (por=='lluvia')?elt.mmLluvia:elt.mmNivel]);
+  const contenido=datosHistoricos.map((d,i)=><tr><td>{i+1}</td><td>{Moment(d.fechaDatos).format('D-MM-YYYY')}</td><td>{Moment(d.fechaDatos).format('hh:mm:s')}</td><td>{(por=='lluvia')?d.mmLluviaAcum:d.mmNivel}</td></tr>);
+  const contenido2 = datosHistoricos.map(elt=> [Moment(elt.fechaDatos).format('D-MM-YYYY'),Moment(elt.fechaDatos).format('hh:mm:s'), (por=='lluvia')?elt.mmLluviaAcum:elt.mmNivel]);
 
 
 const DatosHistoricosRango= async() => {
@@ -132,11 +132,11 @@ const exportPDF = () => {
       <Row className="justify-content-md-center">
         <Col >
         {estadoActual &&
-          <Actual estado={estadoActual} seleccionNivel={por=='lluvia'?'estadoLLuvia':'estadoNivelCaudal'} seleccionValor={por=='lluvia'?'mmLluvia':'mmNivel'}/> }
+          <Actual estado={estadoActual} seleccionNivel={por=='lluvia'?'estadoLLuvia':'estadoNivelCaudal'} seleccionValor={por=='lluvia'?'mmLluviaAcum':'mmNivel'}/> }
         </Col>
         <Col >
         {estadoActual &&
-          <Estadistica estados={estados} seleccionNivel={por=='lluvia'?'estadoLLuvia':'estadoNivelCaudal'} seleccionValor={por=='lluvia'?'mmLluvia':'mmNivel'}/> }
+          <Estadistica estados={estados} seleccionNivel={por=='lluvia'?'estadoLLuvia':'estadoNivelCaudal'} seleccionValor={por=='lluvia'?'mmLluviaAcum':'mmNivel'}/> }
         <br/>
         <Button onClick={()=>setVerHistorico(true)}>Ver HISTORICO</Button>
         </Col>
